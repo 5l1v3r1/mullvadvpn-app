@@ -198,6 +198,12 @@ fi
 
 ./update-relays.sh
 
+if [[ ("$(uname -s)" == "Darwin") || ("$(uname -s)" == "Linux") ]]; then
+    echo "Generating shell completion scripts..."
+    for sh in bash zsh; do
+        "$CARGO_TARGET_DIR/release/mullvad" shell-completions "$sh" "$SCRIPT_DIR/dist-assets/"
+    done
+fi
 
 pushd "$SCRIPT_DIR/gui"
 
